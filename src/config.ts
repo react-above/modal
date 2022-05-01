@@ -1,12 +1,17 @@
+import { Modal } from './modal'
 import { PluginOutput, PluginsService } from './plugins'
-import { FrameFC, FrameService } from './themes'
+import { FrameService, Theme } from './themes'
 
 export interface Config {
-  frame?: FrameFC
+  theme?: Theme
   plugins?: PluginOutput[]
 }
 
-export function configurate({ frame, plugins = [] }: Config) {
+export function configure({ theme, plugins = [] }: Config) {
   plugins.forEach(PluginsService.add)
-  if (frame) FrameService.set(frame)
+
+  if (theme) {
+    FrameService.set(theme.frame)
+    theme.extend?.(Modal)
+  }
 }

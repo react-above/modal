@@ -1,6 +1,6 @@
 export { Modal } from './modal'
 export type { ModalProps, ModalCompound } from './modal'
-export { configurate } from './config'
+export { configure } from './config'
 
 export type { LifecycleCallbackName, LifecycleCallback } from './types'
 export * from './types/overridable'
