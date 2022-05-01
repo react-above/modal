@@ -4,16 +4,14 @@ import { FrameService, ThemeOptionsService } from './themes'
 import { ThemeOutput } from './themes/types'
 
 export interface Config {
-  theme?: ThemeOutput
+  theme: ThemeOutput
   plugins?: PluginOutput[]
 }
 
 export function configure({ theme, plugins = [] }: Config) {
-  plugins.forEach(PluginsService.add)
+  FrameService.set(theme.frame)
+  ThemeOptionsService.set(theme.options)
+  theme.extend?.(Modal)
 
-  if (theme) {
-    FrameService.set(theme.frame)
-    ThemeOptionsService.set(theme.options)
-    theme.extend?.(Modal)
-  }
+  plugins.forEach(PluginsService.add)
 }
