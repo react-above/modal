@@ -13,6 +13,9 @@
   "license": "MIT",
   "repository": "git@github.com:react-above/modal.git",
   "author": "Evgeny Zakharov <to@risen.dev>",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite",
     "build": "rm -rf dist && rollup -c",
