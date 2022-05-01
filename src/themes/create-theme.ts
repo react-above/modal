@@ -7,7 +7,7 @@ interface Options<T> {
 
 export function createTheme<T = void>({ build }: Options<T>): Theme<T> {
   return (options) => ({
-    options,
-    ...build(options),
+    options: options as ReplaceVoid<T>,
+    ...build(options as ReplaceVoid<T>),
   })
 }
