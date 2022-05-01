@@ -8,5 +8,5 @@ export * from './types/overridable'
 export type { createPlugin, Plugin, PluginOutput } from './plugins'
 export * from './plugins/bundled'
 
-export { createTheme } from './themes'
+export { createTheme, useThemeOptions } from './themes'
 export type { Theme, Frame, FrameProps, FrameFC } from './themes'

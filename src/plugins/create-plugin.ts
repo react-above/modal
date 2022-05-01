@@ -11,5 +11,5 @@ interface Options<T> {
  * Also, it helps us in fixing some type issues
  */
 export function createPlugin<T = void>({ build }: Options<T>): Plugin<T> {
-  return (options) => build(options as ReplaceVoid<T>)
+  return (options) => build(options)
 }

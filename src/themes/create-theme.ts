@@ -1,12 +1,13 @@
-import { ModalCompound } from '../modal'
-import { FrameFC } from './frame'
-import { Theme } from './types'
+import { ReplaceVoid } from '../types'
+import { Theme, ThemeOutput } from './types'
 
-interface Options {
-  frame: FrameFC
-  extend?: (Modal: ModalCompound) => void
+interface Options<T> {
+  build: (options: ReplaceVoid<T>) => Omit<ThemeOutput<T>, 'options'>
 }
 
-export function createTheme({ frame, extend }: Options): Theme {
-  return { frame, extend }
+export function createTheme<T = void>({ build }: Options<T>): Theme<T> {
+  return (options) => ({
+    options,
+    ...build(options),
+  })
 }

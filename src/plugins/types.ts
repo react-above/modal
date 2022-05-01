@@ -1,5 +1,5 @@
-import { LifecycleCallbacks } from '../types'
+import { LifecycleCallbacks, ReplaceVoid } from '../types'
 
 export type PluginOutput = LifecycleCallbacks
 
-export type Plugin<T = void> = (options: T) => PluginOutput
+export type Plugin<T = void> = (options: ReplaceVoid<T>) => PluginOutput
