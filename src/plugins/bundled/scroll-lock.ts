@@ -5,7 +5,9 @@ import {
 } from 'body-scroll-lock'
 import { createPlugin } from '../create-plugin'
 
-export const ScrollLockPlugin = createPlugin<BodyScrollOptions | void>({
+export type ScrollLockOptions = BodyScrollOptions
+
+export const ScrollLockPlugin = createPlugin<ScrollLockOptions | void>({
   build: (options) => ({
     onAfterMount: ({ screen }) => disableBodyScroll(screen, options),
     onBeforeUnmount: ({ screen }) => enableBodyScroll(screen),
