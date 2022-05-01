@@ -8,4 +8,4 @@ export interface ThemeOutput<T = void> {
   extend?: (Modal: ModalCompound) => void
 }
 
-export type Theme<T = void> = (options: ReplaceVoid<T>) => ThemeOutput<T>
+export type Theme<T = void> = (options: T) => ThemeOutput<T>
