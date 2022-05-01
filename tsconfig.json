@@ -34,7 +34,7 @@
     "./dist"
   ],
   "include": [
-    "src/index.ts",
+    "src",
     "app"
   ]
 }
