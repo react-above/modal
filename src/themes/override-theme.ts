@@ -14,6 +14,6 @@ export function overrideTheme<T = void>({
 }: Options<T>): Theme<T> {
   return (options) => ({
     ...theme(options),
-    ...override(options),
+    ...override(options as ReplaceVoid<T>),
   })
 }
