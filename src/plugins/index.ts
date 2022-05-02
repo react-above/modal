@@ -1,3 +1,3 @@
-export * from './plugins'
-export * from './types'
+export * from './context'
 export * from './create-plugin'
+export * from './types'

@@ -1,19 +1,19 @@
-import { ReplaceVoid } from '../types'
+import { ModalFC, ReplaceVoid } from '../types'
 import { Theme, ThemeOutput } from './types'
 
-interface Options<T> {
-  theme: Theme<T>
+interface Options<TModal extends ModalFC, TOptions = void> {
+  theme: Theme<TModal, TOptions>
   override: (
-    options: ReplaceVoid<T>
-  ) => Partial<Omit<ThemeOutput<T>, 'options'>>
+    options: ReplaceVoid<TOptions>
+  ) => Partial<Omit<ThemeOutput<TModal, TOptions>, 'options'>>
 }
 
-export function overrideTheme<T = void>({
+export function overrideTheme<TModal extends ModalFC, TOptions = void>({
   theme,
   override,
-}: Options<T>): Theme<T> {
+}: Options<TModal, TOptions>): Theme<TModal, TOptions> {
   return (options) => ({
     ...theme(options),
-    ...override(options as ReplaceVoid<T>),
+    ...override(options as ReplaceVoid<TOptions>),
   })
 }

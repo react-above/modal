@@ -1,11 +1,21 @@
-import { ReplaceVoid } from '../types'
-import { ModalCompound } from '../modal'
-import { FrameFC } from './frame'
+import { FC, MutableRefObject, ReactNode } from 'react'
+import { ModalFC, ReplaceVoid } from '../types'
 
-export interface ThemeOutput<T = void> {
-  options: ReplaceVoid<T>
-  frame: FrameFC
-  extend?: (Modal: ModalCompound) => void
+export interface FrameProps {
+  screenRef: MutableRefObject<HTMLDivElement | null>
+  overlayRef: MutableRefObject<HTMLDivElement | null>
+  containerRef: MutableRefObject<HTMLDivElement | null>
+  children?: ReactNode | undefined
 }
 
-export type Theme<T = void> = (options: T) => ThemeOutput<T>
+export type FrameFC = FC<FrameProps>
+
+export interface ThemeOutput<TModal extends ModalFC, TOptions = void> {
+  options: ReplaceVoid<TOptions>
+  frame: FrameFC
+  extend?: (modal: ModalFC) => TModal
+}
+
+export type Theme<TModal extends ModalFC, TOptions = void> = (
+  options: TOptions
+) => ThemeOutput<TModal, TOptions>

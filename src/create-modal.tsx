@@ -1,5 +1,6 @@
 import React, {
   cloneElement,
+  FC,
   isValidElement,
   MutableRefObject,
   ReactNode,
@@ -9,30 +10,38 @@ import React, {
   useState,
 } from 'react'
 import { createPortal } from 'react-dom'
-import { usePlugins } from './plugins'
+import { PluginOutput, PluginsProvider, usePlugins } from './plugins'
 import {
   NoRenderException,
   NotValidElementException,
   OnlyOneRenderException,
+  RefNotPassedException,
 } from './errors'
 import { parallelizeCallbacks } from './shared/lib/callbacks'
-import { useFrame } from './themes/frame'
-import { LifecycleCallbacks, MountingParams } from './types'
-import { ExtendModalCompound } from './types/overridable'
+import { ModalFC, ModalProps, MountingParams } from './types'
+import { ThemeOutput, ThemeProvider, useTheme } from './themes'
 
-export type ModalProps = {
-  isOpen: boolean
-  close: () => void
-  children?: ReactNode | undefined
-  render?: React.FC<{ close: () => void }>
-} & LifecycleCallbacks
+export interface CreateModal<TModal extends ModalFC, TOptions = void> {
+  theme: ThemeOutput<TModal, TOptions>
+  plugins: PluginOutput[]
+}
 
-export type ModalCompound = React.FC<ModalProps> & ExtendModalCompound
+export function createModal<TModal extends ModalFC, TOptions = void>(
+  options: CreateModal<TModal, TOptions>
+): FC<ModalProps> {
+  return (props) => (
+    <ThemeProvider value={options.theme}>
+      <PluginsProvider value={options.plugins}>
+        <Modal {...props} />
+      </PluginsProvider>
+    </ThemeProvider>
+  )
+}
 
-export const Modal: ModalCompound = (props) => {
+const Modal: FC<ModalProps> = (props) => {
   const { close, children, render } = props
 
-  const Frame = useFrame()
+  const { frame: Frame } = useTheme()
 
   const {
     isMounted,
@@ -116,17 +125,20 @@ function useMounting(props: ModalProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const modalRef = useRef<HTMLDivElement | null>(null)
 
-  function createMountingParams(): MountingParams | null {
-    const html = document.documentElement
-    const body = document.body
-    const screen = screenRef.current
-    const overlay = overlayRef.current
-    const container = containerRef.current
-    const modal = modalRef.current
-
-    if (!screen || !overlay || !container || !modal) return null
-    return { html, body, screen, overlay, container, modal }
+  type ElementRef = MutableRefObject<HTMLDivElement | null>
+  const getElement = (element: string, ref: ElementRef): HTMLDivElement => {
+    if (!ref.current) throw new RefNotPassedException(element)
+    return ref.current
   }
+
+  const createMountingParams = (): MountingParams => ({
+    html: document.documentElement,
+    body: document.body,
+    screen: getElement('screen', screenRef),
+    overlay: getElement('overlay', overlayRef),
+    container: getElement('container', containerRef),
+    modal: getElement('modal', modalRef),
+  })
 
   /*
    * Immediately mount modal when isOpen becomes "true"
@@ -141,6 +153,7 @@ function useMounting(props: ModalProps) {
    */
   useEffect(() => {
     if (!props.isOpen) return
+
     setMounted(true)
 
     return () => {

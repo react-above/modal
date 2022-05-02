@@ -1,3 +1,5 @@
+import { FC, ReactNode } from 'react'
+
 export interface MountingParams {
   html: HTMLElement
   body: HTMLElement
@@ -19,3 +21,12 @@ export interface LifecycleCallbacks {
 
 export type LifecycleCallbackName = keyof LifecycleCallbacks
 export type LifecycleCallback = LifecycleCallbacks[LifecycleCallbackName]
+
+export type ModalProps = {
+  isOpen: boolean
+  close: () => void
+  children?: ReactNode | undefined
+  render?: React.FC<{ close: () => void }>
+} & LifecycleCallbacks
+
+export type ModalFC = FC<ModalProps>

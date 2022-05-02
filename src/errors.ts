@@ -21,3 +21,12 @@ export class NotValidElementException extends Error {
     super(`Modal Renderer output should be a valid React element`)
   }
 }
+
+export class RefNotPassedException extends Error {
+  constructor(element: string) {
+    super(
+      `${element}Ref has not been passed to the appropriate element.` +
+        ` Some library functions and plugins may not work`
+    )
+  }
+}
