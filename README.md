@@ -20,7 +20,10 @@ import { ThemeDefault } from '@react-above/modal-theme-default'
 
 export const Modal = createModal({
   theme: ThemeDefault(),
-  plugins: [ScrollLockPlugin(), FocusLockPlugin()], // optional
+
+  /* Optional */
+  plugins: [ScrollLockPlugin(), FocusLockPlugin()],
+  root: () => document.body
 })
 ```
 

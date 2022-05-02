@@ -27,6 +27,7 @@ export type ModalProps = {
   close: () => void
   children?: ReactNode | undefined
   render?: React.FC<{ close: () => void }>
+  root?: () => HTMLElement
 } & LifecycleCallbacks
 
 export type ModalFC = FC<ModalProps>

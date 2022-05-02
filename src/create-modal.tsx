@@ -23,25 +23,28 @@ import { ThemeOutput, ThemeProvider, useTheme } from './themes'
 
 export interface CreateModal<TModal extends ModalFC, TOptions = void> {
   theme: ThemeOutput<TModal, TOptions>
-  plugins: PluginOutput[]
+  plugins?: PluginOutput[]
+  root?: () => HTMLElement
 }
 
-export function createModal<TModal extends ModalFC, TOptions = void>(
-  options: CreateModal<TModal, TOptions>
-): TModal {
+export function createModal<TModal extends ModalFC, TOptions = void>({
+  theme,
+  plugins = [],
+  root,
+}: CreateModal<TModal, TOptions>): TModal {
   const WrappedModal: ModalFC = (props) => (
-    <ThemeProvider value={options.theme}>
-      <PluginsProvider value={options.plugins}>
-        <Modal {...props} />
+    <ThemeProvider value={theme}>
+      <PluginsProvider value={plugins}>
+        <Modal root={root} {...props} />
       </PluginsProvider>
     </ThemeProvider>
   )
 
-  return options.theme.extend(WrappedModal)
+  return theme.extend(WrappedModal)
 }
 
 const Modal: FC<ModalProps> = (props) => {
-  const { close, children, render } = props
+  const { close, children, render, root = () => document.body } = props
 
   const { frame: Frame } = useTheme()
 
@@ -52,6 +55,10 @@ const Modal: FC<ModalProps> = (props) => {
     containerRef,
     modalRef,
   } = useMounting(props)
+
+  if (typeof document === 'undefined') {
+    return null
+  }
 
   if (!isMounted) {
     return null
@@ -65,7 +72,7 @@ const Modal: FC<ModalProps> = (props) => {
     >
       {createChildren({ modalRef, children, render, close })}
     </Frame>,
-    document.body
+    root()
   )
 }
 
