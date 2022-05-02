@@ -28,14 +28,16 @@ export interface CreateModal<TModal extends ModalFC, TOptions = void> {
 
 export function createModal<TModal extends ModalFC, TOptions = void>(
   options: CreateModal<TModal, TOptions>
-): FC<ModalProps> {
-  return (props) => (
+): TModal {
+  const WrappedModal: ModalFC = (props) => (
     <ThemeProvider value={options.theme}>
       <PluginsProvider value={options.plugins}>
         <Modal {...props} />
       </PluginsProvider>
     </ThemeProvider>
   )
+
+  return options.theme.extend(WrappedModal)
 }
 
 const Modal: FC<ModalProps> = (props) => {
