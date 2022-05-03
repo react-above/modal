@@ -15,7 +15,7 @@ import {
   RefNotPassedException,
 } from './errors'
 import { parallelizeCallbacks } from './shared/lib/callbacks'
-import { ModalFC, ModalProps, MountingParams } from './types'
+import { LifecycleCallbackName, ModalFC, ModalProps } from './types'
 import { ThemeOutput, ThemeProvider, useTheme } from './themes'
 
 export interface CreateModal<TModal extends ModalFC, TOptions = void> {
@@ -106,13 +106,18 @@ function useMounting(props: ModalProps) {
     return ref.current
   }
 
-  const createMountingParams = (): MountingParams => ({
-    html: document.documentElement,
-    body: document.body,
-    screen: getElement('screen', screenRef),
-    overlay: getElement('overlay', overlayRef),
-    container: getElement('container', containerRef),
-  })
+  const runCallback = (name: LifecycleCallbackName) =>
+    parallelizeCallbacks({
+      fromUser: props[name],
+      fromPlugins: plugins.map((plugin) => plugin[name]),
+      params: {
+        html: document.documentElement,
+        body: document.body,
+        screen: getElement('screen', screenRef),
+        overlay: getElement('overlay', overlayRef),
+        container: getElement('container', containerRef),
+      },
+    })
 
   /*
    * Immediately mount modal when isOpen becomes "true"
@@ -131,11 +136,7 @@ function useMounting(props: ModalProps) {
     setMounted(true)
 
     return () => {
-      parallelizeCallbacks({
-        fromUser: props.onBeforeUnmount,
-        fromPlugins: plugins.map((plugin) => plugin.onBeforeUnmount),
-        params: createMountingParams(),
-      }).then(() => {
+      runCallback('onBeforeUnmount').then(() => {
         setMounted(false)
       })
     }
@@ -151,20 +152,10 @@ function useMounting(props: ModalProps) {
   useLayoutEffect(() => {
     if (!isMounted) return
 
-    const params = createMountingParams()
-
-    parallelizeCallbacks({
-      fromUser: props.onAfterMountDOM,
-      fromPlugins: plugins.map((plugin) => plugin.onAfterMountDOM),
-      params,
-    })
+    runCallback('onAfterMountDOM')
 
     return () => {
-      parallelizeCallbacks({
-        fromUser: props.onBeforeUnmountDOM,
-        fromPlugins: plugins.map((plugin) => plugin.onBeforeUnmountDOM),
-        params,
-      })
+      runCallback('onBeforeUnmountDOM')
     }
   }, [isMounted])
 
@@ -174,11 +165,7 @@ function useMounting(props: ModalProps) {
   useEffect(() => {
     if (!isMounted) return
 
-    parallelizeCallbacks({
-      fromUser: props.onAfterMount,
-      fromPlugins: plugins.map((plugin) => plugin.onAfterMount),
-      params: createMountingParams(),
-    })
+    runCallback('onAfterMount')
   }, [isMounted])
 
   return { isMounted, screenRef, overlayRef, containerRef }
