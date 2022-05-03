@@ -46,11 +46,9 @@ import { Modal } from '@app/ui'
 
 #### Render syntax
 
-Also, `react-above` Modal provides the `render` prop API for more flexibility.
+Also, `react-above`'s Modal provides the `render` prop API for more flexibility.
 
 It can be a simple inline-function, or a real React-component - you can freely use hooks inside.
-
-The only requirement is that `modalRef` should be passed into the appropriate component, since the library cannot do it automatically.
 
 ```tsx
 import { Modal } from '@app/ui'
@@ -58,9 +56,8 @@ import { Modal } from '@app/ui'
 <Modal
   isOpen={isOpen}
   close={close}
-  render={({ modalRef, close }) => (
-    /* You should pass modalRef to ensure Modal's correct work */
-    <Modal.Surface ref={modalRef}>
+  render={({ close }) => (
+    <Modal.Surface>
       <Modal.Header title="My modal" close={close} />
       <Modal.Body>My modal description</Modal.Body>
     </Modal.Surface>

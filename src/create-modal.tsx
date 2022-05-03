@@ -1,7 +1,5 @@
 import React, {
-  cloneElement,
   FC,
-  isValidElement,
   MutableRefObject,
   ReactNode,
   useEffect,
@@ -13,7 +11,6 @@ import { createPortal } from 'react-dom'
 import { PluginOutput, PluginsProvider, usePlugins } from './plugins'
 import {
   NoRenderException,
-  NotValidElementException,
   OnlyOneRenderException,
   RefNotPassedException,
 } from './errors'
@@ -48,13 +45,7 @@ const Modal: FC<ModalProps> = (props) => {
 
   const { frame: Frame } = useTheme()
 
-  const {
-    isMounted,
-    screenRef,
-    overlayRef,
-    containerRef,
-    modalRef,
-  } = useMounting(props)
+  const { isMounted, screenRef, overlayRef, containerRef } = useMounting(props)
 
   if (typeof document === 'undefined') {
     return null
@@ -70,62 +61,30 @@ const Modal: FC<ModalProps> = (props) => {
       overlayRef={overlayRef}
       containerRef={containerRef}
     >
-      {createChildren({ modalRef, children, render, close })}
+      {createChildren({ children, render, close })}
     </Frame>,
     root()
   )
 }
 
-type CreateChildrenParams = {
-  modalRef: MutableRefObject<HTMLDivElement | null>
-} & Pick<ModalProps, 'children' | 'render' | 'close'>
+type CreateChildrenParams = Pick<ModalProps, 'children' | 'render' | 'close'>
 
 /**
  * Validate render-like props:
  * 1. User should pass at least one of them
  * 2. User should not pass both of them at the same time
  * 3. User should not pass multiple elements as "children"
- *
- * Clone resulting element and pass our Ref inside
- * We should not override the user's Ref, so we're using mergeRefs function
  */
 function createChildren({
-  modalRef,
   children,
   render,
   close,
 }: CreateChildrenParams): ReactNode {
   if (!children && !render) throw new NoRenderException()
   if (children && render) throw new OnlyOneRenderException()
-
-  if (children) {
-    React.Children.only(children)
-    const [modal] = React.Children.toArray(children)
-    if (!isValidElement(modal)) throw new NotValidElementException()
-    const mergedRefs = mergeRefs([modalRef, modal.props.ref])
-    return cloneElement(modal, { ref: mergedRefs })
-  }
-
-  /*
-   * Passing Refs in FC automatically is not possible without forwardRef
-   * That's why we pass Refs as props, so user can assign them manually
-   */
+  if (!children) return children
   const Renderer = render!
-  return <Renderer modalRef={modalRef} close={close} />
-}
-
-type OptionalRef = MutableRefObject<HTMLElement | null> | undefined
-
-/**
- * Combines multiple Refs into the one
- */
-function mergeRefs(refs: OptionalRef[]) {
-  return (node: HTMLElement) => {
-    for (const ref of refs) {
-      if (!ref) continue
-      ref.current = node
-    }
-  }
+  return <Renderer close={close} />
 }
 
 /**
@@ -140,7 +99,6 @@ function useMounting(props: ModalProps) {
   const screenRef = useRef<HTMLDivElement | null>(null)
   const overlayRef = useRef<HTMLDivElement | null>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const modalRef = useRef<HTMLDivElement | null>(null)
 
   type ElementRef = MutableRefObject<HTMLDivElement | null>
   const getElement = (element: string, ref: ElementRef): HTMLDivElement => {
@@ -154,7 +112,6 @@ function useMounting(props: ModalProps) {
     screen: getElement('screen', screenRef),
     overlay: getElement('overlay', overlayRef),
     container: getElement('container', containerRef),
-    modal: getElement('modal', modalRef),
   })
 
   /*
@@ -224,5 +181,5 @@ function useMounting(props: ModalProps) {
     })
   }, [isMounted])
 
-  return { isMounted, screenRef, overlayRef, containerRef, modalRef }
+  return { isMounted, screenRef, overlayRef, containerRef }
 }

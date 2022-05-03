@@ -42,8 +42,8 @@ const ModalWithRender = () => {
       <Modal
         isOpen={isOpen}
         close={close}
-        render={({ modalRef, close }) => (
-          <Modal.Surface ref={modalRef}>
+        render={({ close }) => (
+          <Modal.Surface>
             <Modal.Header title="My modal" close={close} />
             <Modal.Body>My modal description</Modal.Body>
           </Modal.Surface>

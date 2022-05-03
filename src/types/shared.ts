@@ -1,4 +1,4 @@
-import { FC, MutableRefObject, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 import { ChildlessFC } from './util'
 
 export interface MountingParams {
@@ -7,7 +7,6 @@ export interface MountingParams {
   screen: HTMLElement
   overlay: HTMLElement
   container: HTMLElement
-  modal: HTMLElement
 }
 
 export type MountingCallback = (params: MountingParams) => Promise<void> | void
@@ -24,7 +23,6 @@ export type LifecycleCallbackName = keyof LifecycleCallbacks
 export type LifecycleCallback = LifecycleCallbacks[LifecycleCallbackName]
 
 export type ModalRenderer = ChildlessFC<{
-  modalRef: MutableRefObject<HTMLDivElement | null>
   close: () => void
 }>
 
