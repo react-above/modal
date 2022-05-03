@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react'
-import { ChildlessFC } from './util'
+import { ChildfreeFC } from './util'
 
 export interface MountingParams {
   html: HTMLElement
@@ -22,9 +22,7 @@ export interface LifecycleCallbacks {
 export type LifecycleCallbackName = keyof LifecycleCallbacks
 export type LifecycleCallback = LifecycleCallbacks[LifecycleCallbackName]
 
-export type ModalRenderer = ChildlessFC<{
-  close: () => void
-}>
+export type ModalRenderer = ChildfreeFC<{ close: () => void }>
 
 export type ModalProps = {
   isOpen: boolean

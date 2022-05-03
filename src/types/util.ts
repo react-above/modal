@@ -17,4 +17,4 @@ export type ReplaceVoid<T> = T extends void
   : T
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type ChildlessFC<T = {}> = (props: T) => ReactElement<any, any> | null
+export type ChildfreeFC<T = {}> = (props: T) => ReactElement<any, any> | null
