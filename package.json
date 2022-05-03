@@ -28,6 +28,7 @@
     "@eslint-kit/eslint-config-patch": "^1.0.0",
     "@eslint-kit/eslint-config-prettier": "^3.0.0",
     "@eslint-kit/eslint-config-typescript": "^5.2.0",
+    "@react-above/modal-theme-default": "^0.1.4",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^26.0.14",
     "@types/react": "^16.9.23",
@@ -56,8 +57,8 @@
     "react-dom": "^16.8.0"
   },
   "dependencies": {
-    "body-scroll-lock": "^4.0.0-beta.0",
     "@types/body-scroll-lock": "^3.1.0",
+    "body-scroll-lock": "^4.0.0-beta.0",
     "clsx": "^1.1.1",
     "dom-focus-lock": "^1.0.4"
   }

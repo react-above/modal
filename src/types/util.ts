@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ReactElement } from 'react'
+
 /**
  * Replace "void" with "undefined"
  * Useful for creating more convenient APIs
@@ -12,3 +15,6 @@ export type ReplaceVoid<T> = T extends void
     ? undefined
     : Exclude<T | undefined, void>
   : T
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type ChildlessFC<T = {}> = (props: T) => ReactElement<any, any> | null

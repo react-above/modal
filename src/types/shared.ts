@@ -1,4 +1,5 @@
-import { FC, ReactNode } from 'react'
+import { FC, MutableRefObject, ReactNode } from 'react'
+import { ChildlessFC } from './util'
 
 export interface MountingParams {
   html: HTMLElement
@@ -26,7 +27,11 @@ export type ModalProps = {
   isOpen: boolean
   close: () => void
   children?: ReactNode | undefined
-  render?: React.FC<{ close: () => void }>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render?: ChildlessFC<{
+    modalRef: MutableRefObject<HTMLDivElement | null>
+    close: () => void
+  }>
   root?: () => HTMLElement
 } & LifecycleCallbacks
 

@@ -77,7 +77,7 @@ const Modal: FC<ModalProps> = (props) => {
 }
 
 type CreateChildrenParams = {
-  modalRef: MutableRefObject<HTMLElement | null>
+  modalRef: MutableRefObject<HTMLDivElement | null>
 } & Pick<ModalProps, 'children' | 'render' | 'close'>
 
 /**
@@ -97,13 +97,21 @@ function createChildren({
 }: CreateChildrenParams): ReactNode {
   if (!children && !render) throw new NoRenderException()
   if (children && render) throw new OnlyOneRenderException()
+
+  if (children) {
+    React.Children.only(children)
+    const [modal] = React.Children.toArray(children)
+    if (!isValidElement(modal)) throw new NotValidElementException()
+    const mergedRefs = mergeRefs([modalRef, modal.props.ref])
+    return cloneElement(modal, { ref: mergedRefs })
+  }
+
+  /*
+   * Passing Refs in FC automatically is not possible without forwardRef
+   * That's why we pass Refs as props, so user can assign them manually
+   */
   const Renderer = render!
-  const jsx = children || <Renderer close={close} />
-  React.Children.only(jsx)
-  const [modal] = React.Children.toArray(jsx)
-  if (!isValidElement(modal)) throw new NotValidElementException()
-  const mergedRefs = mergeRefs([modalRef, modal.props.ref])
-  return cloneElement(modal, { ref: mergedRefs })
+  return <Renderer modalRef={modalRef} close={close} />
 }
 
 type OptionalRef = MutableRefObject<HTMLElement | null> | undefined
