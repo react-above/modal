@@ -1,10 +1,9 @@
-import { FC, MutableRefObject, ReactNode } from 'react'
-import { ModalFC, ReplaceVoid } from '../types'
+import { FC, ReactNode } from 'react'
+import { Aria, ModalFC, Refs, ReplaceVoid } from '../types'
 
 export interface FrameProps {
-  screenRef: MutableRefObject<HTMLDivElement | null>
-  overlayRef: MutableRefObject<HTMLDivElement | null>
-  containerRef: MutableRefObject<HTMLDivElement | null>
+  refs: Refs
+  aria?: Aria
   children?: ReactNode | undefined
 }
 

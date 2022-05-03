@@ -3,7 +3,7 @@ import { createPlugin } from '../create-plugin'
 
 export const FocusLockPlugin = createPlugin({
   build: () => ({
-    onAfterMountDOM: ({ container }) => focusLock.on(container),
-    onBeforeUnmountDOM: ({ container }) => focusLock.off(container),
+    onAfterMountDOM: ({ modal }) => focusLock.on(modal),
+    onBeforeUnmountDOM: ({ modal }) => focusLock.off(modal),
   }),
 })
