@@ -9,6 +9,7 @@ export * from './plugins/bundled'
 export type {
   LifecycleCallbackName,
   LifecycleCallback,
+  ModalRenderer,
   ModalProps,
   ModalFC,
 } from './types'

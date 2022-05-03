@@ -23,15 +23,17 @@ export interface LifecycleCallbacks {
 export type LifecycleCallbackName = keyof LifecycleCallbacks
 export type LifecycleCallback = LifecycleCallbacks[LifecycleCallbackName]
 
+export type ModalRenderer = ChildlessFC<{
+  modalRef: MutableRefObject<HTMLDivElement | null>
+  close: () => void
+}>
+
 export type ModalProps = {
   isOpen: boolean
   close: () => void
   children?: ReactNode | undefined
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render?: ChildlessFC<{
-    modalRef: MutableRefObject<HTMLDivElement | null>
-    close: () => void
-  }>
+  render?: ModalRenderer
   root?: () => HTMLElement
 } & LifecycleCallbacks
 
