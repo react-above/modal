@@ -82,7 +82,7 @@ function createChildren({
 }: CreateChildrenParams): ReactNode {
   if (!children && !render) throw new NoRenderException()
   if (children && render) throw new OnlyOneRenderException()
-  if (!children) return children
+  if (children) return children
   const Renderer = render!
   return <Renderer close={close} />
 }
