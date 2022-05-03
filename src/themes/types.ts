@@ -4,7 +4,7 @@ import { Aria, ModalFC, Refs, ReplaceVoid } from '../types'
 export interface FrameProps {
   refs: Refs
   aria?: Aria
-  children?: ReactNode | undefined
+  children: ReactNode
 }
 
 export type FrameFC = FC<FrameProps>
