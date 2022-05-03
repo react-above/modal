@@ -39,7 +39,7 @@ import { Modal } from '@app/ui'
 <Modal isOpen={isOpen} close={close}>
   <Modal.Surface>
     <Modal.Header title="My modal" close={close} />
-    <Modal.Body>My modal text</Modal.Body>
+    <Modal.Body>My modal description</Modal.Body>
   </Modal.Surface>
 </Modal>
 ```
