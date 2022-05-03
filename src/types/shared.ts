@@ -29,8 +29,7 @@ export type ModalRenderer = ChildlessFC<{
 export type ModalProps = {
   isOpen: boolean
   close: () => void
-  children?: ReactNode | undefined
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  children?: ReactNode
   render?: ModalRenderer
   root?: () => HTMLElement
 } & LifecycleCallbacks
