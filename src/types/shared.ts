@@ -1,4 +1,4 @@
-import { FC, MutableRefObject, ReactNode } from 'react'
+import { AriaAttributes, FC, MutableRefObject, ReactNode } from 'react'
 import { ChildfreeFC } from './util'
 
 export interface Elements {
@@ -30,6 +30,8 @@ export interface Aria {
   title: string
   description: string
 }
+
+export type A11yAttributes = { role: 'dialog' } & AriaAttributes
 
 export type ModalProps = {
   isOpen: boolean

@@ -1,9 +1,9 @@
 import { FC, ReactNode } from 'react'
-import { Aria, ModalFC, Refs, ReplaceVoid } from '../types'
+import { A11yAttributes, ModalFC, Refs, ReplaceVoid } from '../types'
 
 export interface FrameProps {
   refs: Refs
-  aria?: Aria
+  a11yAttibutes?: A11yAttributes
   children: ReactNode
 }
 

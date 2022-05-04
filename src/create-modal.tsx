@@ -8,6 +8,7 @@ import { createChildren } from './features/children'
 import { normalizeProps } from './normalize-props'
 import { useCloseOnClickOutside } from './features/close-on-click-outside'
 import { useCloseOnEsc } from './features/close-on-esc'
+import { useA11yAttributes } from './features/a11y'
 
 export interface CreateModal<TModal extends ModalFC, TOptions = void> {
   theme: ThemeOutput<TModal, TOptions>
@@ -41,6 +42,7 @@ const Modal: FC<ModalProps> = (rawProps) => {
   const { isMounted, refs } = useMounting(props)
   useCloseOnClickOutside({ isMounted, props, refs })
   useCloseOnEsc({ isMounted, props })
+  const a11yAttributes = useA11yAttributes(aria)
 
   if (typeof document === 'undefined') {
     return null
@@ -51,7 +53,7 @@ const Modal: FC<ModalProps> = (rawProps) => {
   }
 
   return createPortal(
-    <Frame refs={refs} aria={aria}>
+    <Frame refs={refs} a11yAttibutes={a11yAttributes}>
       {createChildren(props)}
     </Frame>,
     root()
