@@ -25,7 +25,7 @@ export class NotValidElementException extends Error {
 export class RefNotPassedException extends Error {
   constructor(element: string) {
     super(
-      `${element}Ref has not been passed to the appropriate element.` +
+      `${element}'s Ref has not been passed to the appropriate element.` +
         ` Some library functions and plugins may not work`
     )
   }

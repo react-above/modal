@@ -722,10 +722,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@react-above/modal-theme-default@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@react-above/modal-theme-default/-/modal-theme-default-0.1.4.tgz#19a5ba1ec64cee53731f547451484505b1aa2bd1"
-  integrity sha512-Z6Tx49Uv7M5VB1abvY/qis+KsfdThWcT3JgNkP+QwMN9jHhLSA4bdZbe6lYgUEr/y3JQvG+ebFuAyXp1sR7rDg==
+"@react-above/modal-theme-default@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@react-above/modal-theme-default/-/modal-theme-default-0.1.5.tgz#66960fc2cc7a0938e3cd12df8d7438e688053ec1"
+  integrity sha512-qm06+yI+b0RGNOO+JN/4+6Hy9EiCQNZt1WjGaNpLXtPIhdcYfNW2sjud4g+btyRVUL2nkhH47HtgHjksrRcD4A==
   dependencies:
     clsx "^1.1.1"
 

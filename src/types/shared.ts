@@ -1,16 +1,18 @@
 import { FC, MutableRefObject, ReactNode } from 'react'
 import { ChildfreeFC } from './util'
 
-export interface MountingParams {
-  html: HTMLElement
-  body: HTMLElement
-  screen: HTMLElement
-  overlay: HTMLElement
-  modal: HTMLElement
+export interface Elements {
+  screen: HTMLDivElement
+  overlay: HTMLDivElement
+  modal: HTMLDivElement
 }
 
-export type MountingCallback = (params: MountingParams) => Promise<void> | void
-export type MountingCallbackSync = (params: MountingParams) => void
+export type Refs = {
+  [Name in keyof Elements]: MutableRefObject<Elements[Name] | null>
+}
+
+export type MountingCallback = (params: Elements) => Promise<void> | void
+export type MountingCallbackSync = (params: Elements) => void
 
 export interface LifecycleCallbacks {
   onAfterMount?: MountingCallback
@@ -23,12 +25,6 @@ export type LifecycleCallbackName = keyof LifecycleCallbacks
 export type LifecycleCallback = LifecycleCallbacks[LifecycleCallbackName]
 
 export type ModalRenderer = ChildfreeFC<{ close: () => void }>
-
-export interface Refs {
-  screen: MutableRefObject<HTMLDivElement | null>
-  overlay: MutableRefObject<HTMLDivElement | null>
-  modal: MutableRefObject<HTMLDivElement | null>
-}
 
 export interface Aria {
   title: string

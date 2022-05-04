@@ -28,7 +28,7 @@
     "@eslint-kit/eslint-config-patch": "^1.0.0",
     "@eslint-kit/eslint-config-prettier": "^3.0.0",
     "@eslint-kit/eslint-config-typescript": "^5.2.0",
-    "@react-above/modal-theme-default": "^0.1.4",
+    "@react-above/modal-theme-default": "^0.1.5",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^26.0.14",
     "@types/react": "^16.9.23",

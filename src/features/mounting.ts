@@ -3,7 +3,7 @@ import { LifecycleCallbackName, Refs } from '../types'
 import { usePlugins } from '../plugins'
 import { parallelizeCallbacks } from '../shared/lib/callbacks'
 import { NormalizedModalProps } from '../normalize-props'
-import { getRefElement } from '../shared/refs'
+import { getRefElements } from '../shared/refs'
 
 /**
  * Manage everything related to modal mounting state and mounting hooks
@@ -21,19 +21,14 @@ export function useMounting(props: NormalizedModalProps) {
     modal: useRef<HTMLDivElement | null>(null),
   }
 
-  const getElement = (element: keyof Refs) => getRefElement(refs, element)
-
-  const runCallback = (name: LifecycleCallbackName) =>
+  const runCallback = (
+    name: LifecycleCallbackName,
+    elements = getRefElements(refs)
+  ) =>
     parallelizeCallbacks({
       fromUser: props[name],
       fromPlugins: plugins.map((plugin) => plugin[name]),
-      params: {
-        html: document.documentElement,
-        body: document.body,
-        screen: getElement('screen'),
-        overlay: getElement('overlay'),
-        modal: getElement('modal'),
-      },
+      params: elements,
     })
 
   /*
@@ -69,10 +64,12 @@ export function useMounting(props: NormalizedModalProps) {
   useLayoutEffect(() => {
     if (!isMounted) return
 
-    runCallback('onAfterMountDOM')
+    const elements = getRefElements(refs)
+
+    runCallback('onAfterMountDOM', elements)
 
     return () => {
-      runCallback('onBeforeUnmountDOM')
+      runCallback('onBeforeUnmountDOM', elements)
     }
   }, [isMounted])
 

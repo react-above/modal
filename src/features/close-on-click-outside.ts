@@ -14,13 +14,13 @@ export function useCloseOnClickOutside({ isMounted, props, refs }: Params) {
     if (!isMounted) return
     if (!props.closeOnClickOutside) return
 
-    const screen = getRefElement(refs, 'screen')
+    const overlay = getRefElement(refs, 'overlay')
 
     const handler = (event: MouseEvent) => {
-      if (event.target === screen) props.close()
+      if (event.target === overlay) props.close()
     }
 
-    screen.addEventListener('click', handler)
-    return () => screen.removeEventListener('click', handler)
+    overlay.addEventListener('click', handler)
+    return () => overlay.removeEventListener('click', handler)
   }, [isMounted])
 }
