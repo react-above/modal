@@ -39,7 +39,7 @@ const Modal: FC<ModalProps> = (rawProps) => {
 
   const { name: themeName, frame: Frame } = useTheme()
 
-  const { isMounted, refs } = useMounting(props)
+  const { isMounted, refs } = useMounting({ props })
   useCloseOnClickOutside({ isMounted, props, refs })
   useCloseOnEsc({ isMounted, props, refs })
   const a11yAttributes = useA11yAttributes(aria)

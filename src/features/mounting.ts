@@ -5,13 +5,17 @@ import { parallelizeCallbacks } from '../shared/lib/callbacks'
 import { NormalizedModalProps } from '../normalize-props'
 import { getRefElements } from '../shared/refs'
 
+interface Params {
+  props: NormalizedModalProps
+}
+
 /**
  * Manage everything related to modal mounting state and mounting hooks
  *
  * Inside modal we use "isMounted" instead of "isOpen",
  * since the modal may have animation transitions that require it to be mounted
  */
-export function useMounting(props: NormalizedModalProps) {
+export function useMounting({ props }: Params) {
   const plugins = usePlugins()
   const [isMounted, setMounted] = useState(() => props.isOpen)
 
