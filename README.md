@@ -1,13 +1,34 @@
 # @react-above/modal
 
-- Lightweight
+A flexible headless modal library for your React app.
+
 - All commonly used features (`closeOnClickOutside`, `closeOnEsc`, Scroll and Focus locks as plugins)
 - Completely customizable and extendable (actually, it doesn't have an UI out of the box)
+- Lightweight
 - Plugin system (you can even do animations inside)
 - A11y attributes and convenient API for specifying them
 - 2 methods of rendering: `children` and render-prop
 - A lot of lifecycle methods available
 - **Warning**: [**NO** full support for multiple/nested modals](#a-few-words-about-multiplenested-modals)
+
+## Roadmap
+
+- [x] Core modal features
+- [x] Theme support
+- [x] Plugin system
+- [x] Close on ESC and click outside
+- [ ] Theme-level lifecycle callbacks
+- [ ] Animation plugin
+- [ ] Move plugins to separate repos
+- [ ] Plugin and theme repo templates
+- [ ] Better default theme
+- [ ] Test cases for everything
+- [ ] A small documentation and API reference in READMEs
+- [ ] Logo and banner for `react-above`
+- [ ] A good comprehensive documentation on a separate website
+- [ ] Theme catalog with demos
+- [ ] Plugin catalog with demos
+- [ ] More themes
 
 ## Installation
 
