@@ -10,6 +10,7 @@ export interface FrameProps {
 export type FrameFC = FC<FrameProps>
 
 export interface ThemeOutput<TModal extends ModalFC, TOptions = void> {
+  name: string
   options: ReplaceVoid<TOptions>
   frame: FrameFC
   extend: (modal: ModalFC) => TModal

@@ -2,6 +2,7 @@ import { AriaAttributes, FC, MutableRefObject, ReactNode } from 'react'
 import { ChildfreeFC } from './util'
 
 export interface Elements {
+  __root__: HTMLDivElement
   screen: HTMLDivElement
   overlay: HTMLDivElement
   modal: HTMLDivElement

@@ -37,11 +37,11 @@ const Modal: FC<ModalProps> = (rawProps) => {
 
   const { aria, root } = props
 
-  const { frame: Frame } = useTheme()
+  const { name: themeName, frame: Frame } = useTheme()
 
   const { isMounted, refs } = useMounting(props)
   useCloseOnClickOutside({ isMounted, props, refs })
-  useCloseOnEsc({ isMounted, props })
+  useCloseOnEsc({ isMounted, props, refs })
   const a11yAttributes = useA11yAttributes(aria)
 
   if (typeof document === 'undefined') {
@@ -53,9 +53,11 @@ const Modal: FC<ModalProps> = (rawProps) => {
   }
 
   return createPortal(
-    <Frame refs={refs} a11yAttibutes={a11yAttributes}>
-      {createChildren(props)}
-    </Frame>,
+    <div ref={refs.__root__} data-above-theme={themeName} tabIndex={0}>
+      <Frame refs={refs} a11yAttibutes={a11yAttributes}>
+        {createChildren(props)}
+      </Frame>
+    </div>,
     root()
   )
 }

@@ -16,6 +16,7 @@ export function useMounting(props: NormalizedModalProps) {
   const [isMounted, setMounted] = useState(() => props.isOpen)
 
   const refs: Refs = {
+    __root__: useRef<HTMLDivElement | null>(null),
     screen: useRef<HTMLDivElement | null>(null),
     overlay: useRef<HTMLDivElement | null>(null),
     modal: useRef<HTMLDivElement | null>(null),
