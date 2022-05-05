@@ -144,7 +144,15 @@ type ModalProps = {
 ## A few words about multiple/nested modals
 
 The main reasons to say **NO**:
+
 - In most cases, the nested modals [is an anti-pattern](https://uxplanet.org/removing-nested-modals-from-digital-products-6762351cf6de)
 - It can cause inconvenient public API - most likely you would have to render something like `ModalRoot`
 - The `Overlay` shouldn't overlap, so it requires an additional work to be done. We would need a new type of lifecycle callbacks, and the more complicated `Theme` API
 - It's hard to implement and the resulting code won't look good
+
+The current behavior:
+
+- You can open multiple Modals at once
+- The `Overlay` components will overlap - the background will become darker (in case of black transparent `Overlay`)
+- On **click outside**: the **upper one** Modal will be closed
+- On **ESC press**: **ALL** Modals will be closed
