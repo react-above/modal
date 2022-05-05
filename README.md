@@ -6,7 +6,8 @@
 - Plugin system (you can even do animations inside)
 - A11y attributes and convenient API for specifying them
 - 2 methods of rendering: `children` and render-prop
-- A lot of lifecycle methods are available
+- A lot of lifecycle methods available
+- **Warning**: [**NO** full support for multiple/nested modals](#a-few-words-about-multiplenested-modals)
 
 ## Installation
 
@@ -139,3 +140,11 @@ type ModalProps = {
   root?: () => HTMLElement
 }
 ```
+
+## A few words about multiple/nested modals
+
+The main reasons to say **NO**:
+- In most cases, the nested modals [is an anti-pattern](https://uxplanet.org/removing-nested-modals-from-digital-products-6762351cf6de)
+- It can cause inconvenient public API - most likely you would have to render something like `ModalRoot`
+- The `Overlay` shouldn't overlap, so it requires an additional work to be done. We would need a new type of lifecycle callbacks, and the more complicated `Theme` API
+- It's hard to implement and the resulting code won't look good
