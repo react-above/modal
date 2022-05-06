@@ -19,6 +19,7 @@
   "scripts": {
     "dev": "vite",
     "build": "rm -rf dist && rollup -c",
+    "build:demo": "vite build",
     "test": "jest",
     "lint": "eslint --ext .ts,.tsx src"
   },

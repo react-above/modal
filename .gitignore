@@ -16,4 +16,5 @@ node_modules
 !.vscode/launch.json
 !.vscode/extensions.json
 dist
+demo-dist
 package-lock.json
