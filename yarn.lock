@@ -722,12 +722,23 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@react-above/modal-theme-default@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@react-above/modal-theme-default/-/modal-theme-default-0.1.5.tgz#66960fc2cc7a0938e3cd12df8d7438e688053ec1"
-  integrity sha512-qm06+yI+b0RGNOO+JN/4+6Hy9EiCQNZt1WjGaNpLXtPIhdcYfNW2sjud4g+btyRVUL2nkhH47HtgHjksrRcD4A==
+"@react-above/modal-theme-default@^0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@react-above/modal-theme-default/-/modal-theme-default-0.1.8.tgz#c3486b788a60b5f535273cd78a1f6748c01febf0"
+  integrity sha512-kzHUWp/GlB/utbTyDLHQ6EoX8XdODHHakHi4QXk75ZWpvVCklcLngQ4AvGq2JM+ry7f6IjCx7ufNBGYJ3sb9OQ==
   dependencies:
+    "@react-above/modal" "^0.3.5"
     clsx "^1.1.1"
+
+"@react-above/modal@^0.3.5":
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/@react-above/modal/-/modal-0.3.5.tgz#03587336d92172a09be9ef35edb9e8e2d211d7a9"
+  integrity sha512-xpiJzvJiGPaLbVzSDAqoStczZx9E3pcFrUKEPWFJqu6PfzxuXTkVWkBtpAlWovhmRS3uFqBIjDl+sQCpSJYYNw==
+  dependencies:
+    "@types/body-scroll-lock" "^3.1.0"
+    body-scroll-lock "^4.0.0-beta.0"
+    clsx "^1.1.1"
+    dom-focus-lock "^1.0.4"
 
 "@rollup/pluginutils@^4.1.1", "@rollup/pluginutils@^4.2.1":
   version "4.2.1"

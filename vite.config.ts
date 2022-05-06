@@ -1,12 +1,11 @@
 import { defineConfig } from 'vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
 import eslintPlugin from 'vite-plugin-eslint';
 
 const config = defineConfig({
   build: {
-    outDir: 'demo-dist'
+    outDir: 'dist/demo'
   },
-  plugins: [tsconfigPaths(), eslintPlugin()],
+  plugins: [eslintPlugin()],
   server: {
     host: true,
   },

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { render } from 'react-dom'
 import { ThemeDefault } from '@react-above/modal-theme-default'
+import '@react-above/modal-theme-default/dist/lib/styles.css'
 import {
   createModal,
   ScrollLockPlugin,
   FocusLockPlugin,
   ModalRenderer,
-} from '@react-above/modal'
-import '@react-above/modal-theme-default/dist/styles.css'
+} from '../src'
 
 const Modal = createModal({
   theme: ThemeDefault(),

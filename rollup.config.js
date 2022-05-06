@@ -4,10 +4,13 @@ import esbuild from 'rollup-plugin-esbuild'
 import { terser } from 'rollup-plugin-terser'
 import bundleSize from 'rollup-plugin-bundle-size'
 
+const src = (file) => `src/${file}`
+const dist = (file) => `dist/lib/${file}`
+
 const bundle = (config) =>
   defineConfig({
     ...config,
-    input: 'src/index.ts',
+    input: src('index.ts'),
     external: (id) => !/^[./]/.test(id),
     plugins: [
       ...(config.plugins || []),
@@ -20,7 +23,7 @@ const config = defineConfig([
     plugins: [esbuild(), terser()],
     output: [
       {
-        file: `dist/index.js`,
+        file: dist('index.js'),
         format: 'cjs',
       },
     ],
@@ -29,7 +32,7 @@ const config = defineConfig([
     plugins: [esbuild(), terser()],
     output: [
       {
-        file: `dist/index.mjs`,
+        file: dist('index.mjs'),
         format: 'es',
       },
     ],
@@ -38,7 +41,7 @@ const config = defineConfig([
     plugins: [dts()],
     output: [
       {
-        file: 'dist/index.d.ts',
+        file: dist('index.d.ts'),
         format: 'es',
       },
     ],

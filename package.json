@@ -2,10 +2,10 @@
   "name": "@react-above/modal",
   "description": "A superior modal library for React",
   "version": "0.0.0-set-by-ci",
-  "main": "./dist/index.js",
-  "exports": "./dist/index.mjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/lib/index.js",
+  "exports": "./dist/lib/index.mjs",
+  "module": "./dist/lib/index.js",
+  "types": "./dist/lib/index.d.ts",
   "files": [
     "dist"
   ],
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "rm -rf dist && rollup -c",
+    "build": "rollup -c",
     "build:demo": "vite build",
     "test": "jest",
     "lint": "eslint --ext .ts,.tsx src"
@@ -29,7 +29,7 @@
     "@eslint-kit/eslint-config-patch": "^1.0.0",
     "@eslint-kit/eslint-config-prettier": "^3.0.0",
     "@eslint-kit/eslint-config-typescript": "^5.2.0",
-    "@react-above/modal-theme-default": "^0.1.5",
+    "@react-above/modal-theme-default": "^0.1.8",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^26.0.14",
     "@types/react": "^16.9.23",

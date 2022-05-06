@@ -24,10 +24,7 @@
     "outDir": "./dist",
     "typeRoots": [
       "./node_modules/@types"
-    ],
-    "paths": {
-      "@react-above/modal": ["src/"]
-    },
+    ]
   },
   "exclude": [
     "./node_modules",
