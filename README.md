@@ -24,6 +24,7 @@ A flexible headless modal library for your React app.
 - [ ] Better default theme
 - [ ] Test cases for everything
 - [ ] A small documentation and API reference in READMEs
+- [ ] Release v1.0.0
 - [ ] Logo and banner for `react-above`
 - [ ] A good comprehensive documentation on a separate website
 - [ ] Theme catalog with demos
