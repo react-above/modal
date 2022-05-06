@@ -132,6 +132,14 @@ type ReturnType = ModalFC & {
 ```tsx
 type ModalFC = FC<ModalProps>
 
+type Elements = {
+  html: HTMLElement
+  body: HTMLElement
+  screen: HTMLElement
+  overlay: HTMLElement
+  modal: HTMLElement
+}
+
 type ModalProps = {
   // no need to explain
   isOpen: boolean
@@ -160,7 +168,45 @@ type ModalProps = {
 
   // custom root
   root?: () => HTMLElement
+
+  /*
+   * The Modal will wait for Promise to be resolved
+   * You can use this behavior to implement animation delays
+   */
+  onAfterMount?: (elements: Elements) => Promise<void> | void
+  onBeforeUnmount?: (elements: Elements) => Promise<void> | void
+
+  /*
+   * The DOM-postfixed callbacks are called inside useLayoutEffect
+   * If you want to work with HTML nodes - this is the perfect place
+   */
+  onAfterMountDOM?: (elements: Elements) => void
+  onBeforeUnmountDOM?: (elements: Elements) => void
 }
+```
+
+## Creating plugins
+
+```tsx
+/*
+ * Accepts Options type as a generic parameter
+ * It defaults to "void"
+ * 
+ * In "build" callback, "void" transforms to "undefined",
+ * to emulate "optional" parameter for better DX
+ */
+export const MyPlugin = createPlugin<MyPluginOptions | void>({
+  build: (options: MyPluginOptions | undefined) => ({
+    /*
+     * The lifecycle callbacks is optional
+     */
+    onAfterMount: (elements: Elements) => { /* ... */ },
+    onBeforeUnmount: (elements: Elements) => { /* ... */ },
+    onAfterMountDOM: (elements: Elements) => { /* ... */ },
+    onBeforeUnmountDOM: (elements: Elements) => { /* ... */ }
+  }),
+})
+
 ```
 
 ## A few words about multiple/nested modals
