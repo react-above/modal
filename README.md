@@ -17,9 +17,9 @@ A flexible headless modal library for your React app.
 - [x] Theme support
 - [x] Plugin system
 - [x] Close on ESC and click outside
+- [ ] Move plugins to separate repos
 - [ ] Theme-level lifecycle callbacks
 - [ ] Animation plugin
-- [ ] Move plugins to separate repos
 - [ ] Plugin and theme repo templates
 - [ ] Better default theme
 - [ ] Test cases for everything
