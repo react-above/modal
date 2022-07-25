@@ -1,9 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { LifecycleCallbackName, Refs } from '../types'
 import { usePlugins } from '../plugins'
 import { parallelizeCallbacks } from '../shared/lib/callbacks'
 import { NormalizedModalProps } from '../normalize-props'
 import { getRefElements } from '../shared/refs'
+import { useIsomorphicLayoutEffect } from '../shared/lib/react'
 
 interface Params {
   props: NormalizedModalProps
@@ -66,7 +67,7 @@ export function useMounting({ props }: Params) {
    * The callbacks with "DOM" postfix are intended to make DOM operations,
    * that's why we're calling them inside "useLayoutEffect"
    */
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!isMounted) return
 
     const elements = getRefElements(refs)
