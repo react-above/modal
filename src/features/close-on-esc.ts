@@ -1,6 +1,6 @@
-import { useLayoutEffect } from 'react'
 import { Refs } from '../types'
 import { NormalizedModalProps } from '../normalize-props'
+import { useIsomorphicLayoutEffect } from '../shared/lib/react'
 
 interface Params {
   isMounted: boolean
@@ -9,7 +9,7 @@ interface Params {
 }
 
 export function useCloseOnEsc({ isMounted, props }: Params) {
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!isMounted) return
     if (!props.closeOnEsc) return
 

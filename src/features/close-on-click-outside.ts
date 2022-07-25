@@ -1,7 +1,7 @@
-import { useLayoutEffect } from 'react'
 import { Refs } from '../types'
 import { NormalizedModalProps } from '../normalize-props'
 import { getRefElement } from '../shared/refs'
+import { useIsomorphicLayoutEffect } from '../shared/lib/react'
 
 interface Params {
   isMounted: boolean
@@ -10,7 +10,7 @@ interface Params {
 }
 
 export function useCloseOnClickOutside({ isMounted, props, refs }: Params) {
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!isMounted) return
     if (!props.closeOnClickOutside) return
 
