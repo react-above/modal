@@ -53,7 +53,7 @@ const Modal: FC<ModalProps> = (rawProps) => {
   }
 
   return createPortal(
-    <div ref={refs.__root__} data-above-theme={themeName} tabIndex={0}>
+    <div ref={refs.__root__} data-above-theme={themeName}>
       <Frame refs={refs} a11yAttibutes={a11yAttributes}>
         {createChildren(props)}
       </Frame>
