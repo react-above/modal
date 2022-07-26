@@ -6,7 +6,7 @@ const focusTraps = new WeakMap<HTMLDivElement, FocusTrap>()
 export const FocusLockPlugin = createPlugin({
   build: () => ({
     onAfterMountDOM: ({ modal }) => {
-      const focusTrap = createFocusTrap(modal)
+      const focusTrap = createFocusTrap(modal, { allowOutsideClick: true })
       focusTrap.activate()
       focusTraps.set(modal, focusTrap)
     },
